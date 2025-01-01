@@ -11,6 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        cream: "#F2F6D0",
+        honeydew: " #D0E1D4",
+        pearl: "#D9D2B6",
+        desetsand: "#E4BE9E",
+        dimgray: "#71697A",
       },
     },
   },
