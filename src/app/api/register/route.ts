@@ -3,14 +3,12 @@ import { validateEmail } from "@/app/libs/validation";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
-
-
-
-// POST handler
+// POST handler for user registration
 export const POST = async (req: NextRequest) => {
-  const { email, password, name } = await req.json();
+  const { email, password } = await req.json();
 
-  if (!email || !password || !name) {
+  // Validation checks
+  if (!email || !password ) {
     return NextResponse.json(
       { message: "Error", error: "All fields are required" },
       { status: 400 }
@@ -25,6 +23,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
+    // Check if the email is already registered
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -36,15 +35,19 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new user in the database
     await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
-        name,
+       
       },
     });
 
+    // Return success response
     return NextResponse.json(
       { message: "User registered successfully" },
       { status: 201 }
@@ -58,16 +61,18 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-// Default handler for other methods
-export async function handler(req: NextRequest) {
-  if (req.method === "POST") {
-    return POST(req);
-  }
+// Optionally, you can also define GET, PUT, DELETE, etc. handlers here
+export const GET = async () => {
+  // Handle GET request logic (if necessary)
+  return NextResponse.json({ message: "GET method is not implemented" }, { status: 405 });
+};
 
-  return NextResponse.json(
-    { message: "Error", error: "Method Not Allowed" },
-    { status: 405 }
-  );
-}
+export const DELETE = async () => {
+  // Handle DELETE request logic (if necessary)
+  return NextResponse.json({ message: "DELETE method is not implemented" }, { status: 405 });
+};
 
-
+export const PUT = async () => {
+  // Handle PUT request logic (if necessary)
+  return NextResponse.json({ message: "PUT method is not implemented" }, { status: 405 });
+};
