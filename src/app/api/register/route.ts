@@ -3,11 +3,13 @@ import { validateEmail } from "@/app/libs/validation";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
+
+
 // POST handler
 export const POST = async (req: NextRequest) => {
-  const { email, password } = await req.json();
+  const { email, password, name } = await req.json();
 
-  if (!email || !password) {
+  if (!email || !password || !name) {
     return NextResponse.json(
       { message: "Error", error: "All fields are required" },
       { status: 400 }
@@ -38,6 +40,7 @@ export const POST = async (req: NextRequest) => {
       data: {
         email,
         password: hashedPassword,
+        name,
       },
     });
 
@@ -65,4 +68,5 @@ export async function handler(req: NextRequest) {
     { status: 405 }
   );
 }
+
 export { handler as GET, handler as DELETE, handler as PATCH, handler as PUT };
