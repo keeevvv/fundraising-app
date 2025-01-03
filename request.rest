@@ -1,0 +1,8 @@
+GET  https://fundraising-jrpyhvskl-kevz12s-projects.vercel.app/api/hello
+Content-Type: application/json
+
+{
+   
+    "email": "newuser@example.com",
+    "password": "securepassword"
+}

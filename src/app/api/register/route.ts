@@ -8,7 +8,7 @@ export const POST = async (req: NextRequest) => {
   const { email, password } = await req.json();
 
   // Validation checks
-  if (!email || !password ) {
+  if (!email || !password) {
     return NextResponse.json(
       { message: "Error", error: "All fields are required" },
       { status: 400 }
@@ -43,7 +43,6 @@ export const POST = async (req: NextRequest) => {
       data: {
         email,
         password: hashedPassword,
-       
       },
     });
 
@@ -55,7 +54,7 @@ export const POST = async (req: NextRequest) => {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Error", error: "Something went wrong" },
+      { message: error, error: "Something went wrong" },
       { status: 500 }
     );
   }
@@ -64,15 +63,24 @@ export const POST = async (req: NextRequest) => {
 // Optionally, you can also define GET, PUT, DELETE, etc. handlers here
 export const GET = async () => {
   // Handle GET request logic (if necessary)
-  return NextResponse.json({ message: "GET method is not implemented" }, { status: 405 });
+  return NextResponse.json(
+    { message: "GET method is not implemented" },
+    { status: 405 }
+  );
 };
 
 export const DELETE = async () => {
   // Handle DELETE request logic (if necessary)
-  return NextResponse.json({ message: "DELETE method is not implemented" }, { status: 405 });
+  return NextResponse.json(
+    { message: "DELETE method is not implemented" },
+    { status: 405 }
+  );
 };
 
 export const PUT = async () => {
   // Handle PUT request logic (if necessary)
-  return NextResponse.json({ message: "PUT method is not implemented" }, { status: 405 });
+  return NextResponse.json(
+    { message: "PUT method is not implemented" },
+    { status: 405 }
+  );
 };
