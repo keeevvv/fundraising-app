@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 
 
 
+
 // POST handler
 export const POST = async (req: NextRequest) => {
   const { email, password, name } = await req.json();
@@ -69,4 +70,4 @@ export async function handler(req: NextRequest) {
   );
 }
 
-export { handler as GET, handler as DELETE, handler as PATCH, handler as PUT };
+
